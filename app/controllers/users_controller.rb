@@ -1,49 +1,45 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_user, only: [ :show, :edit, :update ]
+  before_action :check_right_user, only: [ :edit, :update ]
 
   def index
-    @users = User.all
+    @users = User.where role: 'trainee'
   end
 
   def show
   end
 
   def new
-    @user = User.new
+    redirect_to root_path
   end
 
   def edit
   end
 
   def create
-    @user = User.new user_params
-      if @user.save
-        log_in @user
-        render @user
-      else
-        render "new"
-    end
   end
 
   def update
     if @user.update user_params
-      render @user
+      redirect_to @user
     else
-      render "edit"
+      render :edit
     end
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_url
   end
 
   private
-    def set_user
-      @user = User.find params[:id]
-    end
+  def set_user
+    @user = User.find params[:id]
+  end
 
-    def user_params
-      params.require(:user).permit :name, :email, :image, :role, :password, :password_confirmation 
-    end
+  def user_params
+    params.require(:user).permit :name, :email, :image, :password, :password_confirmation, :role 
+  end
+    
+  def check_right_user
+    redirect_to root_path unless current_user == @user
+  end
 end

@@ -4,12 +4,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :image
-      t.integer :role
       t.string :password_digest
       t.string :remember_digest
       t.string :reset_digest
       t.string :activation_digest
-
+      t.string :role, index: true
       t.timestamps
     end
   end

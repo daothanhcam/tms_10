@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20150126030911) do
     t.string   "name"
     t.string   "email"
     t.string   "image"
-    t.integer  "role"
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "reset_digest"
     t.string   "activation_digest"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
