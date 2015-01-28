@@ -1,0 +1,23 @@
+<%= form_for(@user) do |f| %>
+  <%= render "shared/error_messages" %>
+
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+
+    <%= f.label :email %><br>
+    <%= f.text_field :email, class: "form-control" %>
+
+  
+    <%= f.label :image %><br>
+    <%= f.text_field :image, class: "form-control" %>
+
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: "form-control" %>
+
+    <%= f.label :retype_password %><br>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+
+  <div class="actions">
+    <%= f.submit "Create my account", class: "btn btn-primary" %>
+  </div>
+<% end %>
