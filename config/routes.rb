@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'static_pages/home'
 
   get 'static_pages/help'
@@ -16,8 +17,13 @@ Rails.application.routes.draw do
   get 'login'   => 'session#new'
   get 'signup'   => 'users#new'
 
-  resources :users
-  root 'users#index'
+  resources :users, only: [:index, :show, :edit, :update]
+  root 'dashboard#show'
+  
+  namespace :suppervisor do
+    root "dashboard#show"
+    resources :users
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

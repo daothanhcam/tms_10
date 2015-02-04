@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+  
+  def suppervisor?
+    self.role == "suppervisor"
+  end
 end

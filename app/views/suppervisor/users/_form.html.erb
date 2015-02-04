@@ -1,16 +1,25 @@
-<%= form_for(@user) do |f| %>
+<%= form_for [:suppervisor, @user] do |f| %>
   <%= render "shared/error_messages" %>
   <%= f.label :name %><br>
   <%= f.text_field :name, class: "form-control" %>
+
   <%= f.label :email %><br>
   <%= f.text_field :email, class: "form-control" %>
   <%= f.label :image %><br>
   <%= f.text_field :image, class: "form-control" %>
+    
+  <%= f.label :right %>
+  <select name="user[role]">
+    <option value="suppervisor">suppervisor</option>
+    <option value="trainee">trainee</option>
+  </select>
+
   <%= f.label :password %><br>
   <%= f.password_field :password, class: "form-control" %>
   <%= f.label :retype_password %><br>
   <%= f.password_field :password_confirmation, class: "form-control" %>
+
   <div class="actions">
-    <%= f.submit "Edit my account", class: "btn btn-primary" %>
+    <%= f.submit "Save account", class: "btn btn-primary" %>
   </div>
 <% end %>
