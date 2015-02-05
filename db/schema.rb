@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204012637) do
+ActiveRecord::Schema.define(version: 20150204083039) do
 
   create_table "subjects", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "num_of_task"
     t.integer  "user_id"
     t.datetime "start"
     t.datetime "finish"
