@@ -8,9 +8,10 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: {maximum: 250},
     format: {with: VALID_EMAIL_REGEX}, uniqueness: true
   validates :password, length: {minimum: 6}
-  validate :file_size => {maximum: 1.megabytes.to_i}
+  validate file_size: {maximum: 1.megabytes.to_i}
 
   has_secure_password
+  scope :trainees, -> {where(role: 'trainee')}
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

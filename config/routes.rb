@@ -19,11 +19,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :edit, :update]
   resources :subjects
+  resources :courses, only: [:index, :show]
+
   root 'dashboard#show'
   
   namespace :suppervisor do
     root "dashboard#show"
     resources :users
+    resources :courses
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

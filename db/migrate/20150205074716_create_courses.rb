@@ -1,9 +1,8 @@
-class CreateSubjects < ActiveRecord::Migration
+class CreateCourses < ActiveRecord::Migration
   def change
-    create_table :subjects do |t|
+    create_table :courses do |t|
       t.string :name
       t.text :description
-      t.references  :user, index: true
       t.datetime :start
       t.datetime :finish
 

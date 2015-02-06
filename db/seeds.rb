@@ -10,8 +10,15 @@ User.create!(name:  "root",
              role: "suppervisor",
              password:              "123456",
              password_confirmation: "123456")
+
 User.create!(name:  "nvluan",
              email: "nvluan@gmail.com",
              role: "trainee",
              password:              "123456",
              password_confirmation: "123456")
+Subject.create!(name:  "Ruby",
+             description:"basic knowleage about Ruby, introduction of Ruby on rails",
+             user: User.first)
+Subject.create!(name:  "Ruby123",
+             description:"basic knowleage about Ruby, introduction of Ruby on rails",
+             user: User.first)
