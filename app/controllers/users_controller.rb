@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [ :show, :edit, :update ]
-  before_action :check_right_user, only: [ :edit, :update ]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :check_right_user, only: [:edit, :update]
 
   def index
-    @users = User.where role: 'trainee'
+    @users = User.trainees
   end
 
   def show

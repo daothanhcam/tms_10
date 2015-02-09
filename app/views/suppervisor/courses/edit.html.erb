@@ -1,0 +1,37 @@
+<h1>Editing course</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for [:suppervisor, @course] do |f| %>
+    <%= render "shared/course_error_messages" %>
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      <div class="field">
+        <table>
+          <% @subjects.each do |subject| %>
+            <%= f.fields_for :courses_subjects, subject do |ff| %>
+              <tr>
+                <td><%= subject.subject_infomation %></td>
+                <td class="selection_checkbox"><%= ff.check_box :_destroy,
+                                       {checked: @course.subjects.include?(subject)}, false, true %></td>
+                <td><%= ff.hidden_field :subject_id, value: subject.id %></td>
+                <% cs = CoursesSubject.getCourseSubject(@course,subject) %>
+                <td><%= ff.hidden_field :id, value: cs.try(:id) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div><br>
+      <div class="actions">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<%= link_to 'Show', @course %> |
+<%= link_to 'Back', suppervisor_courses_path %>

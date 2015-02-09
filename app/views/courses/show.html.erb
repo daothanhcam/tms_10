@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @course.description %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @course.start %>
+</p>
+
+<p>
+  <strong>Finish:</strong>
+  <%= @course.finish %>
+</p>
+
+<h2>
+  <strong>List subject of this course</strong>
+</h2>
+<table>
+  <tr><th>Subject name</th><th>Description</th></tr>
+  <% @subjects.each do |subject| %>
+    <tr><td><%= subject.name %></td><td><%= subject.description %></td></tr>
+  <% end %>
+</table>
+
+<%= link_to "Edit", edit_suppervisor_course_path(@course) %> |
+<%= link_to 'Back', suppervisor_courses_path %>

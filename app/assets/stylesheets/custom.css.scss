@@ -218,7 +218,7 @@ input, select {
   height: auto !important;
 }
 
-#error_explanation {
+error_explanation {
   color: red;
   ul {
     color: red;
@@ -240,6 +240,12 @@ input, select {
     margin-left: 20px;
     font-weight: normal;
   }
+}
+
+.selection_checkbox {
+  width: 14px; 
+  position: absolute;
+  right: 10px;
 }
 
 #session_remember_me {
