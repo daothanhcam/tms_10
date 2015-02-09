@@ -22,6 +22,8 @@ class UsersController < ApplicationController
   def update
     if @user.update user_params
       redirect_to @user
+      @user = current_user.activitys.new(content: 'Update profile')
+      @user.save
     else
       render :edit
     end

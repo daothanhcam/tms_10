@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205075027) do
+ActiveRecord::Schema.define(version: 20150209102323) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "start"
     t.datetime "finish"
+    t.datetime "created_at"
+    t.datetime "updated_at"    
+  end
+
+  create_table "activities", force: true do |t|
+    t.string   "content"
+    t.string   "description"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,11 +34,21 @@ ActiveRecord::Schema.define(version: 20150205075027) do
     t.integer  "course_id"
     t.integer  "subject_id"
     t.datetime "created_at"
+    t.datetime "updated_at"    
+    
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
+
+  create_table "logs", force: true do |t|
+    t.string   "content"
+    t.string   "type"
+    t.integer  "user_id"
+    t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "courses_subjects", ["course_id"], name: "index_courses_subjects_on_course_id", using: :btree
   add_index "courses_subjects", ["subject_id"], name: "index_courses_subjects_on_subject_id", using: :btree
+  add_index "logs", ["user_id"], name: "index_logs_on_user_id", using: :btree
 
   create_table "subjects", force: true do |t|
     t.string   "name"
