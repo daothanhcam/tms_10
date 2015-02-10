@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'signup'   => 'users#new'
 
   resources :users, only: [:index, :show, :edit, :update]
-  resources :subjects
+  resources :subjects, only: [:index, :show]
   resources :courses, only: [:index, :show]
 
   root 'dashboard#show'
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     root "dashboard#show"
     resources :users
     resources :courses
+    resources :subjects
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
