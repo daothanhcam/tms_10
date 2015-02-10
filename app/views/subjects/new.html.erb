@@ -9,13 +9,10 @@
       <%= f.text_field :name, class: "form-control" %>
 
       <%= f.label :description %>
-      <%= f.text_area :description, rows: 3 , class: "form-control" %>
+      <%= f.text_area :description, rows: 3, class: "form-control" %>
 
       <h2>Add tasks</h2>
-      <%= f.fields_for :tasks do |builder|%>
-        <%= render "add_task", f: builder %>
-      <% end %>
-
+      <p><%= creat_add_task_button f, :tasks %></p>
       <%= f.submit "Create subject",  class: "btn btn-primary" %>
     <% end %>
   </div>

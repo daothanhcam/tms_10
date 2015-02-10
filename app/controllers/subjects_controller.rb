@@ -46,7 +46,8 @@ class SubjectsController < ApplicationController
 
   private
   def subject_params
-    params.require(:subject).permit(:name, :description, tasks_attributes: [:name, :description])
+    params.require(:subject).permit(:name, :description,
+     tasks_attributes: [:name, :id, :_destroy])
   end
 
   def logged_in_user
