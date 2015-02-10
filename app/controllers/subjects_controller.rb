@@ -1,5 +1,5 @@
 class SubjectsController < ApplicationController
-  before_action :logged_in_user
+  before_action :logged_in_user, only: [:index, :show]
   before_action :current_subject, only: [:show, :edit, :destroy, :update] 
 
   def index
@@ -12,36 +12,18 @@ class SubjectsController < ApplicationController
   end
 
   def new
-    @subject = current_user.subjects.new
-    @tasks = @subject.tasks.build
   end
 
   def edit
   end
 
   def create
-    @subject = current_user.subjects.new subject_params
-    if @subject.save
-      flash[:success] = "Subject created"
-      redirect_to subjects_url
-    else
-      render :new
-    end
   end
 
   def update
-    if @subject.update_attributes subject_params
-      flash[:success] = "Successfully updated"
-      redirect_to @subject
-    else
-      render :edit
-    end
   end
 
   def destroy
-    @subject.destroy
-    flash[:success] = "Subject is destroyed."
-    redirect_to subjects_url
   end
 
   private

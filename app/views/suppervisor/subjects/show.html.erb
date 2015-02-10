@@ -3,8 +3,9 @@
   <br>
   Description: <%= @subject.description %>
   <br>
-  <span class="timestamp"> Posted <%= time_ago_in_words(@subject.created_at) %> ago. </span>
   <%= link_to "Show", @subject %>
+  <%= link_to "Edit", edit_suppervisor_subject_path(@subject) %>
+  <%= link_to "Delete", @subject, method: :delete, data: {confirm: "Are you sure?"} %>
 
   <h2>List of tasks</h2>
   <% @tasks.each do |task| %>
