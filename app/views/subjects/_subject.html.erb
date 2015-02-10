@@ -1,13 +1,7 @@
-<%= form_for(@subject) do |f| %>
-  <%= render "shared/subject_error_messages" %>
-  
+  <p class = "subjects">
   <%= f.label :Name %><br>
   <%= f.text_field :name, class: "form-control" %>
 
   <%= f.label :Description %>
-  <%= f.text_area :description , class: "form-control" %>
-
-  <div class="actions">
-    <%= f.submit "Edit subject", class: "btn btn-primary" %>
-  </div>
-<% end %>
+  <%= f.text_area :description, class: "form-control" %>
+	</p>
