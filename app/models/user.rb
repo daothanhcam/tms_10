@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many  :tasks
   has_many  :activities
   has_many :enrollments, dependent: :destroy
+  has_many :enrollment_subjects, dependent: :destroy
   has_many :courses, through: :enrollments
   attr_accessor :remember_token  
   before_save {self.email = email.downcase}

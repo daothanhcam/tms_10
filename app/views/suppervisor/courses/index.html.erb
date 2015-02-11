@@ -21,7 +21,9 @@
         <td><%= link_to 'Show', suppervisor_course_path(course) %> |</td>
         <td><%= link_to 'Destroy', suppervisor_course_path(course), 
                                    method: :delete, data: { confirm: 'Are you sure?' } %> |</td>
-        <td><%= link_to 'Edit', edit_suppervisor_course_path(course) %></td>
+        <% if course.start.nil? %>
+          <td><%= link_to 'Edit', edit_suppervisor_course_path(course) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

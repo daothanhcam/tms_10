@@ -8,6 +8,7 @@ class Suppervisor::CoursesController < ::BaseSuppervisorController
   def show
     @subjects = @course.subjects
     @users = @course.users
+    @enrollment_subject = @course.enrollment_subjects.build course_id: params[:id]
   end
 
   def new

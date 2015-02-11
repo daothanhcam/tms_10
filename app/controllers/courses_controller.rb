@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @enrollment_subjects = current_user.enrollment_subjects.where course: @course
     @users = @course.users
     @subjects = @course.subjects
   end

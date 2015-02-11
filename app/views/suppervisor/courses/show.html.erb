@@ -20,6 +20,29 @@
   <%= @course.finish %>
 </p>
 
+<div class="col-md-1 col-md-offset-0">
+  <% if @course.start.nil? %>
+    <div>
+      <%= form_for [:suppervisor,@enrollment_subject] do |f| %>
+        <div><%= hidden_field_tag :course_id, @course.id %></div>
+        <div><%= hidden_field_tag :method, 1 %></div>
+        <%= f.submit "Start", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% else %>
+    <% if @course.finish.nil? %>
+      <div>
+        <%= form_for [:suppervisor,@enrollment_subject] do |ff| %>
+          <div><%= hidden_field_tag :course_id, @course.id %></div>
+          <div><%= hidden_field_tag :mentod, 2 %></div>
+          <%= ff.submit "Finish", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<br><br>
+
 <h2>
   <strong>List subject of this course</strong>
 </h2>
@@ -44,3 +67,7 @@
   <% end %>
 </table>
 <%= link_to 'Add user to course', suppervisor_course_assign_user_path(@course) %>
+</table>
+
+
+<%= link_to 'Back', suppervisor_courses_path %>
