@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     root "dashboard#show"
     resources :users
     resources :courses
+    resources :courses do
+      resources :enrollments
+      get 'assign_user' => 'enrollments#new'
+    end
     resources :subjects
   end
 

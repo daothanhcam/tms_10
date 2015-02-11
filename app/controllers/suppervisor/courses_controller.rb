@@ -7,6 +7,7 @@ class Suppervisor::CoursesController < ::BaseSuppervisorController
 
   def show
     @subjects = @course.subjects
+    @users = @course.users
   end
 
   def new
@@ -32,6 +33,7 @@ class Suppervisor::CoursesController < ::BaseSuppervisorController
     if @course.update_attributes course_params
       redirect_to suppervisor_course_path(@course)
     else
+      @subjects = Subject.all
       render :edit
     end
   end
@@ -47,7 +49,7 @@ class Suppervisor::CoursesController < ::BaseSuppervisorController
   end
 
   def course_params
-    params.require(:course).permit(:name, :description, :start, :finish, 
-                                   courses_subjects_attributes: [:subject_id, :id, :_destroy])
+    params.require(:course).permit :name, :description, :start, :finish, user_ids: [],
+                                   courses_subjects_attributes: [:subject_id, :id, :_destroy]
   end
 end
