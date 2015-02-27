@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many  :subjects
   has_many  :tasks
+  has_many :enrollments, dependent: :destroy
+  has_many :courses, through: :enrollments
   attr_accessor :remember_token  
   before_save {self.email = email.downcase}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -11,7 +13,11 @@ class User < ActiveRecord::Base
   validate file_size: {maximum: 1.megabytes.to_i}
 
   has_secure_password
-  scope :trainees, -> {where(role: 'trainee')}
+  
+  scope :trainees, ->{where(role: 'trainee')}
+  scope :dont_join_any_courses, ->{includes(:enrollments).where(enrollments: {user: nil})} 
+  scope :joining_with_course, ->(course) {includes(:enrollments).where(enrollments: {course: course, status: [0, 1]})}
+  scope :finished_all_courses, ->{includes(:enrollments).where(enrollments: {status: 2})}
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

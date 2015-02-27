@@ -1,11 +1,13 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user
+  before_action :set_course, only: [:show]
 
   def index
     @courses = Course.all
   end
 
   def show
+    @users = @course.users
     @subjects = @course.subjects
   end
 
@@ -25,12 +27,16 @@ class CoursesController < ApplicationController
   end
 
   private
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
+  
   def set_course
     @course = Course.find params[:id]
   end
 
-  def course_params
-    params.require(:course).permit(:name, :description, :start, :finish, 
-                                    courses_subjects_attributes: [:subject_id, :id, :_destroy])
-  end
 end

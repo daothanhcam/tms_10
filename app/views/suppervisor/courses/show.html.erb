@@ -29,7 +29,18 @@
   <% @subjects.each do |subject| %>
     <tr><td><%= subject.name %> - <%= subject.description %></td></tr>
   <% end %>
-</table>
+</table><br>
 
-<%= link_to 'Edit', edit_suppervisor_course_path(@course) %> |
-<%= link_to 'Back', suppervisor_courses_path %>
+<h2>
+  <strong>List user attend this course</strong>
+</h2>
+<table>
+  <tr><th>Name</th><th></th></tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= link_to "view user", user %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Add user to course', suppervisor_course_assign_user_path(@course) %>
