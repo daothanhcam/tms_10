@@ -3,8 +3,11 @@ class Suppervisor::SubjectsController < ::BaseSuppervisorController
   before_action :current_subject, only: [:show, :edit, :destroy, :update] 
 
   def index
-    @subjects = current_user.subjects.all
+    @subjects = Subject.all
     @tasks = Task.all
+    @subjects.each do |subject|
+      @enrollment_task = subject.enrollment_tasks.new
+    end
   end
 
   def show

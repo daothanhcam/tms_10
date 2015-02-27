@@ -21,10 +21,9 @@ function remove_fields(field) {
   $(field).parent().hide();
 }
 
-function add_fields(link, name) {
+function add_fields(link, content) {
   var new_id = new Date().getTime();
-  var r = /\d+/g;
-  var m = r.exec(name);
-  var re = new RegExp(m, 'g');
-  $(link).parent().prev().append(name.replace(re,new_id));
+  var expression = "[0-9]+";
+  var regexp = new RegExp(expression, 'g');
+  $(link).parent().before(content.replace(regexp, new_id));
 }

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :enrollments, dependent: :destroy
   has_many :enrollment_subjects, dependent: :destroy
   has_many :courses, through: :enrollments
+  has_many :enrollment_tasks, dependent: :destroy
+  has_many :enrollment_subjects, dependent: :destroy
   attr_accessor :remember_token  
   before_save {self.email = email.downcase}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
