@@ -21,10 +21,16 @@ class UsersController < ApplicationController
 
   def update
     if @user.update user_params
-      redirect_to @user
+        redirect_to @user
+        log_activity
     else
       render :edit
     end
+  end
+
+  def log_activity
+    act = current_user.activities.new(act_type: "update profile")
+    act.save
   end
 
   def destroy
