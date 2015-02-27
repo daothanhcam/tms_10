@@ -19,6 +19,15 @@
   <strong>Type:</strong>
   <%= @user.role %>
 </p>
+
+<% @user.activities.each do |act| %>
+  <% if act.act_type == "update profile"%>
+    <ul>
+      Update profile <%= time_ago_in_words(act.created_at) %> ago.
+    </ul>
+  <% end %>
+<% end %>
+
 <% if current_user == @user %>
   <%= link_to "Edit", edit_user_path(@user) %> |
 <% end %>

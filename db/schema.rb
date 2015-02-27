@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205075027) do
+ActiveRecord::Schema.define(version: 20150227075054) do
+
+  create_table "activities", force: true do |t|
+    t.text     "act_type"
+    t.integer  "user_id"
+    t.integer  "cource_id"
+    t.integer  "subject_id"
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["cource_id"], name: "index_activities_on_cource_id", using: :btree
+  add_index "activities", ["subject_id"], name: "index_activities_on_subject_id", using: :btree
+  add_index "activities", ["task_id"], name: "index_activities_on_task_id", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -31,6 +46,17 @@ ActiveRecord::Schema.define(version: 20150205075027) do
 
   add_index "courses_subjects", ["course_id"], name: "index_courses_subjects_on_course_id", using: :btree
   add_index "courses_subjects", ["subject_id"], name: "index_courses_subjects_on_subject_id", using: :btree
+
+  create_table "enrollments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "status"
+  end
+
+  add_index "enrollments", ["course_id"], name: "index_enrollments_on_course_id", using: :btree
+  add_index "enrollments", ["user_id"], name: "index_enrollments_on_user_id", using: :btree
 
   create_table "subjects", force: true do |t|
     t.string   "name"

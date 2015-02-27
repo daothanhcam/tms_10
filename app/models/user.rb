@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many  :subjects
   has_many  :tasks
+  has_many  :activities
   has_many :enrollments, dependent: :destroy
   has_many :courses, through: :enrollments
   attr_accessor :remember_token  
