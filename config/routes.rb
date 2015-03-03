@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :subjects, only: [:index, :show]
   resources :courses, only: [:index, :show]
-
   root 'dashboard#show'
+  resources :enrollment_subjects
   
   namespace :suppervisor do
     root "dashboard#show"
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get 'assign_user' => 'enrollments#new'
     end
     resources :subjects
+    resources :enrollment_subjects
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

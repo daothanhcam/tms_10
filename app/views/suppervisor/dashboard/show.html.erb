@@ -5,4 +5,18 @@
 <br>
 <br>
 <br>
-User List : <%= link_to "link", suppervisor_users_path %>
+<table>
+  <% @users.each do |user|%>
+    <% @course = user.courses.attending_courses.first %>
+    <tr>
+      <td><%= user.name %></td>
+      <td>
+        <% if @course %>
+          <%=  link_to @course.name, suppervisor_course_path(@course) %>
+        <% else %>
+          <%=  link_to "Add user to course", suppervisor_courses_path %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

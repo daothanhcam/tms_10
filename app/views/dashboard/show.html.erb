@@ -1,4 +1,34 @@
 <br>
 <br>
 <br>
-<h1>Welcome to Training Managerment System</h1>
+<h1>Welcome to Training System</h1>
+<% if current_user %>
+  <h2>Attending course</h2>
+  <table>
+    <tr><td>Name</td><td>Description</td></tr>
+      <tr>
+        <% if @attening_course %>
+          <td><%= @attening_course.name %></td>
+          <td><%= @attening_course.description %></td>
+          <td><%= link_to "view this course", @attening_course %></td>
+        <% else %>
+          You aren't attending any course
+        <% end %>
+      </tr>
+  </table>
+  <h2>Attended courses</h2>
+  <table>
+    <tr><td>Name</td><td>Description</td></tr>
+    <% if @attened_courses %>
+      <% @attened_courses.each do |course| %>
+        <tr>
+          <td><%= course.name %></td>
+          <td><%= course.description %></td>
+          <td><%= link_to "view this course", course %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% else %>
+  Please <%= link_to "login", login_path %> to access system
+<% end %>

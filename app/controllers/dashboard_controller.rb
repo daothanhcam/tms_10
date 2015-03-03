@@ -3,7 +3,10 @@ class DashboardController < ApplicationController
     if current_user && current_user.suppervisor?
       redirect_to "/suppervisor"
     else
-      redirect_to users_path
+      if current_user
+        @attened_courses = current_user.courses.attended_courses
+        @attening_course = current_user.courses.attending_courses.first
+      end
     end
   end
 end
