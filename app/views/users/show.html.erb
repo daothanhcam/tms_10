@@ -1,34 +1,107 @@
-<p id="notice"><%= notice %></p>
+<div class = "row">
+  <div class = "col-md-6">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @user.image %>
-</p>
+    <p>
+      <strong>Image:</strong>
+      <%= @user.image %>
+    </p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @user.role %>
-</p>
+    <p>
+      <strong>Type:</strong>
+      <%= @user.role %>
+    </p>
 
-<% @user.activities.each do |act| %>
-  <% if act.act_type == "update profile"%>
-    <ul>
-      Update profile <%= time_ago_in_words(act.created_at) %> ago.
-    </ul>
-  <% end %>
-<% end %>
+    <% if current_user == @user %>
+      <%= link_to "Edit", edit_user_path(@user) %> |
+    <% end %>
+    <%= link_to "Back", users_path %>
+    <br><br><br>
+  </div>
+</div>
+<div class = "row">
+  <div class = "col-md-6">
 
-<% if current_user == @user %>
-  <%= link_to "Edit", edit_user_path(@user) %> |
-<% end %>
-<%= link_to "Back", users_path %>
+    <% @user.enrollments.each do |enrollment| %>
+      <% if enrollment.status == 1 %>
+        <div class = "row">
+          <strong>Tranning course: <%= enrollment.course.name %></strong>
+        </div>
+        <% enrollment.course.subjects.each do |sub| %>
+          
+        <div class = "row">  
+        <div class = "col-md-9">
+          <strong><%= sub.name %></strong>
+        </div>
+
+        <div class = "col-md-3">
+          <% @user.enrollment_subjects.each do |es| %>
+
+            <% if es.courses_subject.subject_id == sub.id && es.status == 0 %>
+              <button type="button" class="btn btn-danger disabled">Not start</button>
+            <% end %>
+
+            <% if es.courses_subject.subject_id == sub.id && es.status == 1 %>
+              <button type="button" class="btn btn-danger disabled">Not start</button>
+            <% end %>
+
+            <% if es.courses_subject.subject_id == sub.id && es.status == 2 %>
+              <button type="button" class="btn btn-danger disabled">Not start</button>
+            <% end %>
+
+          <% end %>
+        </div>
+</div>
+          <ul class = "list-group">
+            <% sub.tasks.each do |task| %>
+              <li class = "list-group-item">
+                <div class = "row">
+                <div class = "col-md-9">
+                  <%= task.name %>
+                </div>
+                <div class = "col-md-3">
+                  <% task.enrollment_tasks.each do |e| %>
+
+                    <% if e.status == 0 && e.user_id == @user.id %>
+                      <button type="button" class="btn btn-danger disabled">Not start</button>
+                    <% end %>
+
+                    <% if e.status == 1 && e.user_id == @user.id %>
+                      <button type="button" class="btn btn-primary disabled">Training</button>
+                    <% end %>
+
+                    <% if e.status == 2 && e.user_id == @user.id %>
+                      <button type="button" class="btn btn-success disabled">Finished</button>
+                    <% end %>
+
+                  <% end %>               
+                </div> 
+              </div>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class = "col-md-offset-7">
+    <p>
+      <strong> Recent activities: </strong>
+    </p>
+    <% @user.activities.each do |act| %>
+      <% if act.act_type == "update profile" %>
+        <li>Update profile <%= time_ago_in_words(act.created_at) %> ago.</li>
+      <% end %>
+    <% end %>
+  </div>  
+</div>
