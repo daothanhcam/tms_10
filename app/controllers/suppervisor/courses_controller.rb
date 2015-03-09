@@ -9,6 +9,9 @@ class Suppervisor::CoursesController < ::BaseSuppervisorController
     @subjects = @course.subjects
     @users = @course.users
     @enrollment_subject = @course.enrollment_subjects.build course_id: params[:id]
+    @subjects.each do |subject|
+      @enrollment_task = subject.enrollment_tasks.new
+    end
   end
 
   def new

@@ -1,6 +1,8 @@
 class Subject < ActiveRecord::Base
   belongs_to :user
   has_many :tasks, dependent: :destroy
+  has_many :enrollment_subjects, dependent: :destroy
+  has_many :enrollment_tasks, dependent: :destroy
   accepts_nested_attributes_for :tasks,
     reject_if: proc {|attributes| attributes['name'].blank?},
     allow_destroy: true

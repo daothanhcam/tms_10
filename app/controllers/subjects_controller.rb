@@ -3,12 +3,14 @@ class SubjectsController < ApplicationController
   before_action :current_subject, only: [:show, :edit, :destroy, :update] 
 
   def index
-    @subjects = current_user.subjects.all
-    @tasks = Task.all
+    @subjects = Subject.all
   end
 
   def show
     @tasks = @subject.tasks
+    @tasks.each do |task|
+      @enrollment_task = task.enrollment_tasks.new
+    end 
   end
 
   def new

@@ -10,7 +10,8 @@ class Suppervisor::EnrollmentSubjectsController < ::BaseSuppervisorController
         @course.courses_subjects.each do |courses_subject|
           @course.enrollment_subjects.build enrollment: enrollment,
                                             user: enrollment.user, 
-                                            courses_subject: courses_subject
+                                            courses_subject: courses_subject,
+                                            subject: courses_subject.subject
         end
       end
       

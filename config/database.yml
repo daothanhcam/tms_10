@@ -10,7 +10,6 @@ common: &common
 development:
   <<: *common
   database: tms_development
-  #socket: /tmp/mysql.sock
 
 test:
   <<: *common

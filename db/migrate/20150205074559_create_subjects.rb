@@ -3,9 +3,8 @@ class CreateSubjects < ActiveRecord::Migration
     create_table :subjects do |t|
       t.string :name
       t.text :description
-      t.datetime :start
-      t.datetime :finish
       t.references :user, index: true
+      t.references :enrollment, index: true
 
       t.timestamps
     end
