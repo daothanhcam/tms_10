@@ -1,12 +1,10 @@
 <h1>Subjects Infomation</h1>
-  Name: <%= @subject.name %>
-  <br>
-  Description: <%= @subject.description %>
-  <br>
-  <span class="timestamp"> Posted <%= time_ago_in_words(@subject.created_at) %> ago. </span>
-  <%= link_to "Show", @subject %>
+<strong>Subject Name: </strong><%= @subject.name %>
+<br>
+<strong>Description: </strong> <%= @subject.description %>
+<br><br>
 
-  <h2>List of tasks</h2>
-  <% @tasks.each do |task| %>
-    Name: <%= task.name %></td>
-  <% end %>
+<strong>List of tasks</strong>
+<% @tasks.each do |task| %>
+  <br><strong>Task Name: </strong><%= task.name %><br>
+<% end %>

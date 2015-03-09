@@ -48,19 +48,36 @@ ActiveRecord::Schema.define(version: 20150227075054) do
   add_index "courses_subjects", ["subject_id"], name: "index_courses_subjects_on_subject_id", using: :btree
 
   create_table "enrollment_subjects", force: true do |t|
-    t.integer  "course_id"
     t.integer  "user_id"
+    t.integer  "subject_id"
+    t.integer  "course_id"
     t.integer  "courses_subject_id"
     t.integer  "enrollment_id"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
   end
 
   add_index "enrollment_subjects", ["course_id"], name: "index_enrollment_subjects_on_course_id", using: :btree
   add_index "enrollment_subjects", ["courses_subject_id"], name: "index_enrollment_subjects_on_courses_subject_id", using: :btree
   add_index "enrollment_subjects", ["enrollment_id"], name: "index_enrollment_subjects_on_enrollment_id", using: :btree
+  add_index "enrollment_subjects", ["subject_id"], name: "index_enrollment_subjects_on_subject_id", using: :btree
   add_index "enrollment_subjects", ["user_id"], name: "index_enrollment_subjects_on_user_id", using: :btree
+
+  create_table "enrollment_tasks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.integer  "subject_id"
+    t.integer  "enrollment_subject_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enrollment_tasks", ["enrollment_subject_id"], name: "index_enrollment_tasks_on_enrollment_subject_id", using: :btree
+  add_index "enrollment_tasks", ["subject_id"], name: "index_enrollment_tasks_on_subject_id", using: :btree
+  add_index "enrollment_tasks", ["task_id"], name: "index_enrollment_tasks_on_task_id", using: :btree
+  add_index "enrollment_tasks", ["user_id"], name: "index_enrollment_tasks_on_user_id", using: :btree
 
   create_table "enrollments", force: true do |t|
     t.integer  "user_id"
@@ -76,26 +93,24 @@ ActiveRecord::Schema.define(version: 20150227075054) do
   create_table "subjects", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "start"
-    t.datetime "finish"
     t.integer  "user_id"
+    t.integer  "enrollment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "subjects", ["enrollment_id"], name: "index_subjects_on_enrollment_id", using: :btree
   add_index "subjects", ["user_id"], name: "index_subjects_on_user_id", using: :btree
 
   create_table "tasks", force: true do |t|
     t.string   "name"
-    t.text     "description"
-    t.datetime "start"
-    t.datetime "finish"
     t.integer  "subject_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "tasks", ["subject_id"], name: "index_tasks_on_subject_id", using: :btree
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :subjects, only: [:index, :show]
   resources :courses, only: [:index, :show]
+  resources :enrollment_tasks
+
   root 'dashboard#show'
   resources :enrollment_subjects
   
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
       get 'assign_user' => 'enrollments#new'
     end
     resources :subjects
+    resources :enrollment_tasks
     resources :enrollment_subjects
   end
 

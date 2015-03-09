@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :subject
-  default_scope ->{order(created_at: :desc)}
+  has_many :enrollment_tasks, dependent: :destroy
   
   validates :name, presence: true
 end
